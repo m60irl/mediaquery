@@ -16,7 +16,7 @@ export function lookup(id) {
         const data = {
             id: `${user};${video}`,
             type: 'odysee',
-            title: info.title,
+            title: isLive ? info.fulltitle : info.title,
             duration: isLive ? 0 : Math.floor(info.duration),
             meta: {
                 embed: {
