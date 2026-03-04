@@ -12,15 +12,18 @@ export function lookup(id) {
     const mediaURL = `https://odysee.com/@${user}/${video}`;
 
     return ytdl(mediaURL).then((info)=>{
+        const isLive = info.is_live === true;
         const data = {
             id: `${user};${video}`,
             type: 'odysee',
             title: info.title,
-            duration: Math.floor(info.duration),
+            duration: isLive ? 0 : Math.floor(info.duration),
             meta: {
                 embed: {
                     tag: 'iframe',
-                    src: `https://odysee.com/$/embed/${video}/${info.id}`
+                    src: isLive
+                        ? `https://odysee.com/$/embed/@${user}/${video}`
+                        : `https://odysee.com/$/embed/${video}/${info.id}`
                 },
                 thumbnail: info.thumbnail,
             }
