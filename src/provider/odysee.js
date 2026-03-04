@@ -23,7 +23,7 @@ export function lookup(id) {
                     tag: 'iframe',
                     src: isLive
                         ? `https://odysee.com/$/embed/@${user}/${video}`
-                        : `https://odysee.com/$/embed/${video}/${info.id}`
+                        : `https://odysee.com/$/embed/${video.split(':', 1)[0]}/${info.id}`
                 },
                 thumbnail: info.thumbnail,
             }
